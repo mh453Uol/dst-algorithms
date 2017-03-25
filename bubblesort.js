@@ -11,16 +11,23 @@
 
 function bubblesort(unsortedItems) {
     for (var i = 0; i < unsortedItems.length; i++) {
-        for (var j = 0; j < unsortedItems.length - 1 - i; j++) //unsortedItems.length - 1 - i stop sorting already sorted items.
+        var isAnySwaps = false;
+        for (var j = 0; j < unsortedItems.length - 1 - i; j++) {
+            //unsortedItems.length - 1 - i stop sorting already sorted items.
             var firstItem = unsortedItems[j];
-        var secondItem = unsortedItems[j + 1];
-        if (firstItem > secondItem) {
-            unsortedItems = swap(firstItem, secondItem, unsortedItems);
+            var secondItem = unsortedItems[j + 1];
+            if (firstItem > secondItem) {
+                unsortedItems = swap(firstItem, secondItem, unsortedItems);
+                isAnySwaps = true;
+            }
+        }
+        if (!isAnySwaps) {
+            return unsortedItems;
         }
     }
+    return unsortedItems;
 }
-return unsortedItems;
-}
+
 
 function swap(firstItem, secondItem, unsortedItems) {
     var firstItemIndex = unsortedItems.indexOf(firstItem);
