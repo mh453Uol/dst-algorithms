@@ -39,3 +39,23 @@ function insert(value, tail) {
 }
 
 console.log(insertionSort([3, 2, 1, 10, -10]));
+
+
+//In place insertion sort rather than using 2 arrays
+function inPlaceInsertionSort(unsortedItems) {
+    for (var i = 0; i < unsortedItems.length; i++) {
+        var insertingValue = unsortedItems[i];
+        for (var j = i - 1; j >= 0; j--) {
+            var tailValue = unsortedItems[j];
+            if (tailValue > insertingValue) {
+                //tail is greather than current inserting value so we swap
+                //since tail value is greater
+                unsortedItems[j] = insertingValue;
+                unsortedItems[j + 1] = tailValue;
+            }
+        }
+    }
+    return unsortedItems;
+}
+
+console.log(inPlaceInsertionSort([3, 2, 1, 10, -1, -1]));
