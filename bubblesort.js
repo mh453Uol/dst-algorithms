@@ -7,7 +7,7 @@
 //[2,1,3] 2 > 1 if so swap
 //   _
 //[1,2,3] 2 > 1 
-//Scanning will happen array.length-1 time
+//We dont need to check the last value so 2 > 3 since the last number will always be in the right place
 
 function bubblesort(unsortedItems) {
     for (var i = 0; i < unsortedItems.length; i++) {
