@@ -48,4 +48,29 @@ function binarySearch(unsortedList, find) {
     console.log("Not Found!");
 }
 
-binarySearch([1, 2, 3, 4, 5, 6], 3);
+function binarySearchR(unsortedList, find) {
+
+    if (unsortedList.length == 0) {
+        console.log("NOT Found!");
+        return;
+    }
+
+    var middle = Math.floor((unsortedList.length - 1) / 2);
+    var halfed = [];
+
+    // search right side of array
+    if (find > unsortedList[middle]) {
+        halfed = unsortedList.slice(middle + 1);
+    } else if (find < unsortedList[middle]) {
+        //slice api when we pass 5 it get element up to 4
+        //so we pass in middle however it actualy 
+        //get middle-1 elements
+        halfed = unsortedList.slice(0, middle);
+    } else {
+        console.log("Found");
+        return;
+    }
+    binarySearchR(halfed, find);
+}
+
+binarySearchR([1, 2, 3, 4, 5, 6], 0);
