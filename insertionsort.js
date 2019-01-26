@@ -58,4 +58,4 @@ function inPlaceInsertionSort(unsortedItems) {
     return unsortedItems;
 }
 
-console.log(inPlaceInsertionSort([3, 2, 1, 10, -1, -1]));
+//console.log(inPlaceInsertionSort([3, 2, 1, 10, -1, -1]));

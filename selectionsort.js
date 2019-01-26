@@ -22,15 +22,16 @@ function getSmallestValue(unsortedList) {
 }
 
 var sortedList = selectionSort([9, 8, 2, 0, 1, -1]);
-console.log(sortedList);
+//console.log(sortedList);
 
 //2nd Implementation 
 //In place so we dont use a second array
 //Array:[9,8,1,-1]
-//Swap smallest value with nth position
-//Array:[-1,8,1,9] <- NB: -1
-//Array: [-1,1,8,9] <- NB: 1
-//Array: [-1,1,8,9] <- NB: 8
+//1. First smallest value and swap current value
+//Array:[9,8,1,-1] so 9, -1 will swap
+//Array:[-1,8,1,9] so 8, 1 will swap
+//Array: [-1,1,8,9] so 8 wil not swap
+//Array: [-1,1,8,9] 
 //Array: [-1,1,8,9] <- Dont need to sort last element
 
 function inplaceSelectionSort(unsortedList) {
@@ -41,7 +42,8 @@ function inplaceSelectionSort(unsortedList) {
         if (fromUnsortedIndex === copyOfUnsortedList.length - 2) {
             return copyOfUnsortedList;
         }
-
+        //                                        (Sorted)(Unsorted)
+        //Each time we swap the left side is sorted [(-1,)(8,1,9]) the tailFrom get the unsorted part
         var unsortedElements = tailFrom(fromUnsortedIndex, copyOfUnsortedList);
         var smallestValue = getSmallestValue(unsortedElements);
         copyOfUnsortedList = swap(smallestValue, fromUnsortedIndex, copyOfUnsortedList);
@@ -66,4 +68,29 @@ function swap(smallestValue, swapToIndex, unsortedList) {
     return unsortedList;
 }
 
-console.log(inplaceSelectionSort([9, 8, 2, 0, 1, -1]));
+//O(N*N) however uses less memory (variables etc) than other implementations above
+function selectionSortFast(unsortedList) {
+    var currentValue;
+    var smallestValueIndex;
+    //i is the current value index
+    for (var i = 0; i < unsortedList.length; i++) {
+        smallestValueIndex = i;
+        // from current index iterate to find smallest value
+        // keep track of smallest index so we can swap
+        for (var j = i; j < unsortedList.length; j++) {
+            if (unsortedList[j] < unsortedList[smallestValueIndex]) {
+                smallestValueIndex = j;
+            }
+        }
+        currentValue = unsortedList[i];
+        //swap current value with smallest value
+        unsortedList[i] = unsortedList[smallestValueIndex];
+        unsortedList[smallestValueIndex] = currentValue;
+    }
+
+    return unsortedList;
+}
+
+console.log(selectionSortFast([9, 8, 2, 0, 1, -1]));
+console.log(selectionSortFast([9, -1, 2, 199, 1, -1]));
+//console.log(inplaceSelectionSort([9, 8, 2, 0, 1, -1]));
