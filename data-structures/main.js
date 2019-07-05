@@ -23,7 +23,7 @@ console.log(list.length); // 1
 
 console.log('/////////////////');
 
-// 1,2,3,4 
+// 1,2,3,4
 list.push(2);
 list.push(3);
 list.push(4);
@@ -60,4 +60,30 @@ console.log(hashtable.has('a')); //false
 console.log(hashtable.has('aa')); //true
 console.log(hashtable.has('-1-1-1')); //false
 */
+
+
+/////////////////////// Stack //////////////////////////
+
+/*
+
+let stack = new Stack();
+
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+
+console.log(stack.peek()); //4
+
+stack.pop();
+stack.pop();
+stack.pop();
+stack.pop();
+stack.pop();
+
+console.log(stack.list); //[]
+console.log(stack.length); //0
+
+*/
+
 
