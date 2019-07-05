@@ -86,4 +86,25 @@ console.log(stack.length); //0
 
 */
 
+/////////////////////// Queue //////////////////////////
+
+/* 
+let queue = new Queue();
+
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+queue.enqueue(4);
+console.log(queue.list); // [1,2,3,4]
+
+console.log(queue.peek()); //1
+
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
+
+console.log(queue.length); //1
+console.log(queue.peek()); //4
+console.log(queue.list);
+*/
 
