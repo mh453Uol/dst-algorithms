@@ -164,3 +164,74 @@ console.log(network.toString());
 // linkedList.remove(1); //2
 // console.log(linkedList.toString());
 
+/////////////////////// Trees //////////////////////////
+
+// let tree = new Tree();
+
+// tree.root = {
+//     value: 'A',
+//     children: [
+//         { value: 'B', children: [{ value: 'B.0', children: [] }] },
+//         { value: 'C', children: [{ value: 'C.0', children: [] }] },
+//         {
+//             value: 'D',
+//             children: [
+//                 {
+//                     value: 'D.0',
+//                     children: [
+//                         { value: 'D.0.0', children: [] }
+//                     ]
+//                 }
+//             ]
+//         }
+//     ]
+// }
+
+/**
+ * Traverse function is depth first so
+ * A -> 
+ *      B -> B.0
+ *      C -> C.0
+ *      D -> D.0 -> D.0.0
+ */
+
+// tree.traverse(tree.print);
+
+// tree.add('D.0.0.0','D.0.0');
+// tree.add('E', 'A');
+// tree.add('E.0', 'E');
+// tree.add('E.0.0', 'E.0');
+// console.log('-----------------');
+// tree.traverse(tree.print);
+
+/////////////////////// Binary Search Tree //////////////////////////
+let bTree = new BinarySearchTree();
+
+// 10 
+//  - 5
+//      - 2
+//      - 6
+//  - 15
+//      - 11
+//      - 16
+bTree.root = new BNode(10, 
+    new BNode(5, 
+        new BNode(2), new BNode(6)),
+    new BNode(15, 
+        new BNode(11), new BNode(16)));
+
+console.log(bTree.root);
+
+console.log(bTree.contains(16));
+console.log(bTree.contains(5));
+console.log(bTree.contains(6));
+console.log(bTree.contains(10));
+console.log(bTree.contains(11));
+
+console.log(bTree.contains(0));
+console.log(bTree.contains(1));
+console.log(bTree.contains(-1));
+
+
+
+
