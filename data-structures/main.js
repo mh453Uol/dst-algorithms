@@ -108,3 +108,59 @@ console.log(queue.peek()); //4
 console.log(queue.list);
 */
 
+/////////////////////// Graphs //////////////////////////
+/*
+
+let network = new Graph();
+
+network.addNode('mum');
+network.addNode('dad');
+
+network.addNode('Male: majid');
+network.addNode('Male: C');
+
+network.addNode('Female: A');
+network.addNode('Female: S');
+
+network.addLine('mum', 'Male: majid'); network.addLine('dad', 'Male: majid');
+network.addLine('mum', 'Male: C'); network.addLine('dad', 'Male: C');
+
+console.log(network.toString());
+
+*/
+
+/////////////////////// Linked List //////////////////////////
+
+// let linkedList = new LinkedList();
+// linkedList.add(1);
+// linkedList.add(2);
+// linkedList.add(3);
+
+// console.log(linkedList);
+
+// console.log(linkedList.get(1)); //1
+// console.log(linkedList.get(2)); //2
+// console.log(linkedList.get(3)); //3
+// console.log(linkedList.get(4)); // error
+
+// linkedList.addAtPosition(-1,1); //-1 => 1 => 2 => 3
+// console.log(linkedList.toString());
+
+// linkedList.addAtPosition(100,3); //-1 => 1 => 100 => 2 => 3
+// console.log(linkedList.toString());
+
+// linkedList.remove(1);
+// console.log(linkedList.toString()); // 1 => 100 => 2 =>=> 3
+
+// linkedList.remove(2); // 1 => 2 => 3
+// console.log(linkedList.toString());
+
+// linkedList.remove(1); // 2 => 3
+// console.log(linkedList.toString());
+
+// linkedList.remove(2); //2
+// console.log(linkedList.toString());
+
+// linkedList.remove(1); //2
+// console.log(linkedList.toString());
+
