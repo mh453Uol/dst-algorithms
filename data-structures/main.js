@@ -205,7 +205,7 @@ console.log(network.toString());
 // tree.traverse(tree.print);
 
 /////////////////////// Binary Search Tree //////////////////////////
-let bTree = new BinarySearchTree();
+//let bTree = new BinarySearchTree();
 
 // 10 
 //  - 5
@@ -214,6 +214,8 @@ let bTree = new BinarySearchTree();
 //  - 15
 //      - 11
 //      - 16
+
+/*
 bTree.root = new BNode(10, 
     new BNode(5, 
         new BNode(2), new BNode(6)),
@@ -231,6 +233,7 @@ console.log(bTree.contains(11));
 console.log(bTree.contains(0));
 console.log(bTree.contains(1));
 console.log(bTree.contains(-1));
+*/
 
 
 
