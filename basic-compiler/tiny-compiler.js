@@ -172,4 +172,27 @@ class TinyCompiler {
             indexInString++;
         }
     }
+
+    /**
+     * Given tokens 
+     * [ 
+     *   {type: 'paran', value: '('},   
+     *   {type: 'name', value: 'add'},
+     *   {type: 'number', value: 1},
+     *   {type: 'number', value: 2},
+     *   {type: 'paran', value: ')'}
+     * ] convert it to a Abstract Syntax Tree (AST) -
+     * { type: 'Program', body: [
+     *  { type: 'CallExpression', name: 'add', params: 
+     *      [
+     *          {type: 'NumberLiteral', value: '2'}, 
+     *          {type: 'NumberLiteral', value: '3'}
+     *      ]
+     *  }
+     * ]}
+     * @param {*} tokens 
+     */
+    function parser(tokens) {
+
+    }
 }
