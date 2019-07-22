@@ -67,17 +67,22 @@ class TinyCompiler {
         let currentLetterInString = '';
 
         let number = new RegExp(/[0-9]/);
-        let notANumber = new RegExp(/[^0-9]/);
+        let whitespace = new RegExp(/\s/);
 
         while (indexInString < input.length) {
 
             // currentLetterInString is:
             // 1. ( or ) - Create token with type paren
-            // 2. number (0-n) have to all chars until a space
+            // 2. number (0-n) have to read all chars until a space
             //  2.1 (add ^10021212 1212) and we are at index ^
-            //      then we need to keep reading until a space
-            // 3. names if not a paren or number we assume its a function
+            //      then we need to keep reading until a space or anything thats not a number
+            // 3. Handle whitespace i.e (<remove  >add<remove   >1 2) 
+            //    we dont need to store whitespace.
+            // 4. Handle strings i.e (concat "foo" "bar") convert into 
+            //    { type: 'string', value: 'foo'}
+            // 4. names if not a paren or number we assume its a function
             //    so we need to keep reading until space
+
 
             currentLetterInString = input[indexInString];
 
@@ -90,6 +95,11 @@ class TinyCompiler {
 
                 console.log(tokens);
                 // go to next loop cycle
+                continue;
+            }
+
+            if(whitespace.test(currentLetterInString)) {
+                indexInString++;
                 continue;
             }
 
@@ -114,6 +124,27 @@ class TinyCompiler {
 
                 console.log(tokens);
 
+                continue;
+            }
+
+            if(currentLetterInString == '"') {
+                debugger;
+                // keep reading until you '"' which signals the end
+                // of the string
+                let parsedString = '';
+                // dont need to include '"'[
+                indexInString++;
+                currentLetterInString = input[indexInString];
+
+                while(currentLetterInString != '"' && indexInString < input.length) {
+                    parsedString += currentLetterInString;
+                    indexInString++;
+                    currentLetterInString = input[indexInString];
+                }
+                tokens.push({ type: 'string', value: parsedString});
+                
+                //exclude the '"' end closing quote
+                indexInString++;
                 continue;
             }
 
