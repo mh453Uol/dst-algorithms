@@ -7,3 +7,5 @@ compiler.tokenizer('(add      (add 1          2) (       add 2 3))');
 
 compiler.tokenizer('(concat "majid" "h")');
 
+compiler.parser(compiler.tokenizer('(add 100 200)'));
+

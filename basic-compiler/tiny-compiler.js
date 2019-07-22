@@ -1,3 +1,12 @@
+class ASTNode {
+    type = '';
+    value = '';
+
+    // Call Expression Variables
+    name = '';
+    params = [];
+};
+
 class TinyCompiler {
 
     /**
@@ -98,7 +107,7 @@ class TinyCompiler {
                 continue;
             }
 
-            if(whitespace.test(currentLetterInString)) {
+            if (whitespace.test(currentLetterInString)) {
                 indexInString++;
                 continue;
             }
@@ -127,7 +136,7 @@ class TinyCompiler {
                 continue;
             }
 
-            if(currentLetterInString == '"') {
+            if (currentLetterInString == '"') {
                 debugger;
                 // keep reading until you '"' which signals the end
                 // of the string
@@ -136,13 +145,13 @@ class TinyCompiler {
                 indexInString++;
                 currentLetterInString = input[indexInString];
 
-                while(currentLetterInString != '"' && indexInString < input.length) {
+                while (currentLetterInString != '"' && indexInString < input.length) {
                     parsedString += currentLetterInString;
                     indexInString++;
                     currentLetterInString = input[indexInString];
                 }
-                tokens.push({ type: 'string', value: parsedString});
-                
+                tokens.push({ type: 'string', value: parsedString });
+
                 //exclude the '"' end closing quote
                 indexInString++;
                 continue;
@@ -176,11 +185,11 @@ class TinyCompiler {
     /**
      * Given tokens 
      * [ 
-     *   {type: 'paran', value: '('},   
+     *   {type: 'paren', value: '('},   
      *   {type: 'name', value: 'add'},
      *   {type: 'number', value: 1},
      *   {type: 'number', value: 2},
-     *   {type: 'paran', value: ')'}
+     *   {type: 'paren', value: ')'}
      * ] convert it to a Abstract Syntax Tree (AST) -
      * { type: 'Program', body: [
      *  { type: 'CallExpression', name: 'add', params: 
@@ -192,7 +201,85 @@ class TinyCompiler {
      * ]}
      * @param {*} tokens 
      */
-    function parser(tokens) {
+    parser(tokens) {
 
+        let current = 0;
+
+        let ast = {
+            type: 'Program',
+            body: []
+        }
+
+        function walk() {
+            let token = tokens[current];
+
+            // if number return ast number node
+            if (token.type === 'number') {
+                current++;
+                return {
+                    type: 'NumberLiteral',
+                    value: token.value
+                }
+            }
+
+            // if string return ast string node
+            if (token.type === "string") {
+                current++;
+                return {
+                    type: 'StringLiteral',
+                    value: token.value
+                }
+            }
+
+            /**
+             * nested call expressions i.e 
+             * {type: 'paren', value: '('},   
+             * {type: 'name', value: 'add'},
+             * {type: 'number', value: 1},
+             * ////////// Nested Function Call ///////////
+             *      {type: 'paren', value: '('},   
+             *      {type: 'name', value: 'add'},
+             *      {type: 'number', value: 1},
+             *      {type: 'number', value: 2},
+             *      {type: 'paren', value: ')'}
+             * ///////////////////////////////////////////
+             * {type: 'paren', value: ')'}
+             */
+
+            if (token.type === 'paren' && token.value === '(') {
+                // we dont care about the ( just move the cursor
+                current++;
+                token = tokens[current];
+
+                let node = {
+                    type: 'CallExpression', name: token[current].value, params =[]
+                };
+
+                // move the cursor to point to either string or number params passed to function
+                current++;
+                token = tokens[current];
+
+                // we want to create a whole CallExpression node with its params so keep reading
+                // until token value is )
+                while(
+                    // allow numbers and strings literals to be added to params 
+                    (token.type !== 'paren') ||
+                    (token.type === 'paren' && token.value !== ')')
+                ) {
+                    node.params.push(walk()); 
+                    // Only when recursion finishes we reach here
+                    token = tokens[current];
+                }
+                current++;
+                return node;
+            }
+        }
+
+        while (current < tokens.length) {
+            ast.body.push(walk());
+        }
+        console.log(ast);
+        return ast;
     }
 }
+
